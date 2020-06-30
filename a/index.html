@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A</title>
+  </head>
+  <body>
+    <iframe id="myIframe" src="http://b.test.localhost/index.html"></iframe>
+    <script>
+      setTimeout(() => {
+        document.domain = /(\w+)(.\w+)?$/.exec(location.hostname)[0];
+
+        const iframeWindow = document.getElementById("myIframe").contentWindow;
+
+        console.log(iframeWindow.test);
+
+        console.log("before");
+        iframeWindow.postMessage("A message to you", "http://b.test.localhost");
+        console.log("after");
+      }, 1000);
+    </script>
+  </body>
+</html>
